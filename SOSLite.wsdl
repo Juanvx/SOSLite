@@ -1,0 +1,230 @@
+<?xml version="1.0"?>
+<wsdl:definitions targetNamespace="urn:SOSLite"
+                  xmlns:tns="urn:SOSLite"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+                  xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
+                  xmlns:swes="http://www.opengis.net/swes/2.0"
+                  xmlns:ows="http://www.opengis.net/ows/1.1"
+                  xmlns:sosw="http://www.opengis.net/sos/2.0/wsdl"
+                  xmlns:sos="http://www.opengis.net/sos/2.0"
+>
+
+    <!--Types-->
+    <wsdl:types>
+        <xsd:schema elementFormDefault="qualified" targetNamespace="http://www.opengis.net/sos/2.0">
+            <xsd:include schemaLocation="http://schemas.opengis.net/sos/2.0/sos.xsd"/>
+        </xsd:schema>
+        <xsd:schema elementFormDefault="qualified" targetNamespace="http://www.opengis.net/ows/1.1">
+            <xsd:include schemaLocation="http://schemas.opengis.net/ows/1.1.0/owsAll.xsd"/>
+        </xsd:schema>
+        <xsd:schema elementFormDefault="qualified" targetNamespace="http://www.opengis.net/swes/2.0">
+            <xsd:include schemaLocation="http://schemas.opengis.net/swes/2.0/swes.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+
+    <!--Messages-->
+    <!-- GetCapabilities -->
+    <wsdl:message name="GetCapabilities200RequestMessage">
+        <wsdl:part name="body" element="sos:GetCapabilities"/>
+    </wsdl:message>
+    <wsdl:message name="GetCapabilities200ResponseMessage">
+        <wsdl:part name="body" element="sos:Capabilities"/>
+    </wsdl:message>
+    <!-- DescribeSensor -->
+    <wsdl:message name="DescribeSensor200RequestMessage">
+        <wsdl:part name="body" element="swes:DescribeSensor"/>
+    </wsdl:message>
+    <wsdl:message name="DescribeSensor200ResponseMessage">
+        <wsdl:part name="body" element="swes:DescribeSensorResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ExceptionMessage">
+        <wsdl:part name="fault" element="ows:Exception"/>
+    </wsdl:message>
+    <!-- InsertSensor -->
+    <wsdl:message name="InsertSensor200RequestMessage">
+        <wsdl:part name="body" element="swes:InsertSensor"/>
+    </wsdl:message>
+    <wsdl:message name="InsertSensor200ResponseMessage">
+        <wsdl:part name="body" element="swes:InsertSensorResponse"/>
+    </wsdl:message>
+    <!-- DeleteSensor -->
+    <wsdl:message name="DeleteSensor200RequestMessage">
+        <wsdl:part name="body" element="swes:DeleteSensor"/>
+    </wsdl:message>
+    <wsdl:message name="DeleteSensor200ResponseMessage">
+        <wsdl:part name="body" element="swes:DeleteSensorResponse"/>
+    </wsdl:message>
+    <!-- GetFeatureOfInterest -->
+    <wsdl:message name="GetFeatureOfInterest200RequestMessage">
+        <wsdl:part name="body" element="sos:GetFeatureOfInterest"/>
+    </wsdl:message>
+    <wsdl:message name="GetFeatureOfInterest200ResponseMessage">
+        <wsdl:part name="body" element="sos:GetFeatureOfInterestResponse"/>
+    </wsdl:message>
+    <!-- GetObservation -->
+    <wsdl:message name="GetObservation200RequestMessage">
+        <wsdl:part name="body" element="sos:GetObservation"/>
+    </wsdl:message>
+    <wsdl:message name="GetObservation200ResponseMessage">
+        <wsdl:part name="body" element="sos:GetObservationResponse"/>
+    </wsdl:message>
+    <!-- InsertObservation -->
+    <wsdl:message name="InsertObservation200RequestMessage">
+        <wsdl:part name="body" element="sos:InsertObservation"/>
+    </wsdl:message>
+    <wsdl:message name="InsertObservation200ResponseMessage">
+        <wsdl:part name="body" element="sos:InsertObservationResponse"/>
+    </wsdl:message>
+
+    <!--Operations-->
+    <wsdl:portType name="SosPostPortType">
+        <!-- GetCapabilities -->
+        <wsdl:operation name="GetCapabilities200">
+            <wsdl:input name="GetCapabilities200RequestMessage" message="tns:GetCapabilities200RequestMessage" wsam:Action="urn:SOSLite/GetCapabilities"/>
+            <wsdl:output name="GetCapabilities200ResponseMessage" message="tns:GetCapabilities200ResponseMessage"/>
+            <wsdl:fault name="ExceptionMessage" message="tns:ExceptionMessage"/>
+        </wsdl:operation>
+        <!-- DescribeSensor -->
+        <wsdl:operation name="DescribeSensor200">
+            <wsdl:input name="DescribeSensor200RequestMessage" message="tns:DescribeSensor200RequestMessage" wsam:Action="urn:SOSLite/DescribeSensor"/>
+            <wsdl:output name="DescribeSensor200ResponseMessage" message="tns:DescribeSensor200ResponseMessage"/>
+            <wsdl:fault name="ExceptionMessage" message="tns:ExceptionMessage"/>
+        </wsdl:operation>
+        <!-- InsertSensor -->
+        <wsdl:operation name="InsertSensor200">
+            <wsdl:input name="InsertSensor200RequestMessage" message="tns:InsertSensor200RequestMessage" wsam:Action="urn:SOSLite/InsertSensor"/>
+            <wsdl:output name="InsertSensor200ResponseMessage" message="tns:InsertSensor200ResponseMessage" />
+            <wsdl:fault name="ExceptionMessage" message="tns:ExceptionMessage" />
+        </wsdl:operation>
+        <!-- DeleteSensor -->
+        <wsdl:operation name="DeleteSensor200">
+            <wsdl:input name="DeleteSensor200RequestMessage" message="tns:DeleteSensor200RequestMessage" wsam:Action="urn:SOSLite/DeleteSensor"/>
+            <wsdl:output name="DeleteSensor200ResponseMessage" message="tns:DeleteSensor200ResponseMessage" />
+            <wsdl:fault name="ExceptionMessage" message="tns:ExceptionMessage" />
+        </wsdl:operation>
+        <!-- GetFeatureOfInterest -->
+        <wsdl:operation name="GetFeatureOfInterest200">
+            <wsdl:input name="GetFeatureOfInterest200RequestMessage" message="tns:GetFeatureOfInterest200RequestMessage" wsam:Action="urn:SOSLite/GetFeatureOfInterest"/>
+            <wsdl:output name="GetFeatureOfInterest200ResponseMessage" message="tns:GetFeatureOfInterest200ResponseMessage"/>
+            <wsdl:fault name="ExceptionMessage" message="tns:ExceptionMessage"/>
+        </wsdl:operation>
+        <!-- GetObservation -->
+        <wsdl:operation name="GetObservation200">
+            <wsdl:input name="GetObservation200RequestMessage" message="tns:GetObservation200RequestMessage" wsam:Action="urn:SOSLite/GetObservation"/>
+            <wsdl:output name="GetObservation200ResponseMessage" message="tns:GetObservation200ResponseMessage" />
+            <wsdl:fault name="ExceptionMessage" message="tns:ExceptionMessage" />
+        </wsdl:operation>
+        <!-- InsertObservation -->
+        <wsdl:operation name="InsertObservation200">
+            <wsdl:input name="InsertObservation200RequestMessage" message="tns:InsertObservation200RequestMessage" wsam:Action="urn:SOSLite/InsertObservation"/>
+            <wsdl:output name="InsertObservation200ResponseMessage" message="tns:InsertObservation200ResponseMessage" />
+            <wsdl:fault name="ExceptionMessage" message="tns:ExceptionMessage" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <!--Bindings-->
+    <wsdl:binding name="SOSLite_Binding" type="tns:SosPostPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <!-- GetCapabilities -->
+        <wsdl:operation name="GetCapabilities200">
+            <soap:operation soapAction="urn:SOSLite/GetCapabilities" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ExceptionMessage">
+                <soap:fault name="ExceptionMessage" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <!-- DescribeSensor -->
+        <wsdl:operation name="DescribeSensor200">
+            <soap:operation soapAction="urn:SOSLite/DescribeSensor" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ExceptionMessage">
+                <soap:fault name="ExceptionMessage" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <!-- InsertSensor -->
+        <wsdl:operation name="InsertSensor200">
+            <soap:operation soapAction="urn:SOSLite/InsertSensor" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ExceptionMessage">
+                <soap:fault name="ExceptionMessage" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation> 
+        <!-- DeleteSensor -->
+        <wsdl:operation name="DeleteSensor200">
+            <soap:operation soapAction="urn:SOSLite/DeleteSensor" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ExceptionMessage">
+                <soap:fault name="ExceptionMessage" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation> 
+        <!-- GetFeatureOfInterest -->
+        <wsdl:operation name="GetFeatureOfInterest200">
+            <soap:operation soapAction="urn:SOSLite/GetFeatureOfInterest" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ExceptionMessage">
+                <soap:fault name="ExceptionMessage" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation> 
+        <!-- GetObservation -->  
+        <wsdl:operation name="GetObservation200">
+            <soap:operation soapAction="urn:SOSLite/GetObservation" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ExceptionMessage">
+                <soap:fault name="ExceptionMessage" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation> 
+        <!-- InsertObservation -->
+        <wsdl:operation name="InsertObservation200">
+            <soap:operation soapAction="urn:SOSLite/InsertObservation" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ExceptionMessage">
+                <soap:fault name="ExceptionMessage" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>     
+    </wsdl:binding>
+
+    <!--Servicess-->
+    <wsdl:service name="SOSLite_Service">
+        <wsdl:port name="SosPostPortType" binding="tns:SOSLite_Binding">
+            <soap:address location="http://localhost/SOSLite/soslite-server.php"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
